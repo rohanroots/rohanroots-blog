@@ -3,7 +3,10 @@ title: "I Asked an AI Agent to Buy Me a VPS"
 description: "It compared providers, picked a $35.99-a-year server, filled out the checkout, then got stuck on two password fields."
 pubDate: 2026-09-13
 canonical: "https://rohanroots.substack.com"
+image: "/blog/vps-cover.png"
 ---
+
+![An AI agent pushing a shopping cart with a server rack in it](/blog/vps-cover.png)
 
 **FIELD NOTES ON PRACTICAL AI AGENTS**
 
