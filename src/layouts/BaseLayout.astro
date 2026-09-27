@@ -1,0 +1,117 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Notes on AI agents, self-hosting, and infra.' } = Astro.props;
+const siteTitle = 'rohan roots';
+const fullTitle = title === siteTitle ? title : `${title} — ${siteTitle}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/jpeg" href="/avatar.jpg" />
+    <link rel="alternate" type="application/rss+xml" title="rohan roots RSS" href="/rss.xml" />
+    <title>{fullTitle}</title>
+    <style>
+      :root {
+        --bg: #0a0e14;
+        --surface: #10151d;
+        --text: #e6e9ef;
+        --muted: #8b93a3;
+        --teal: #2dd4bf;
+        --amber: #f5a524;
+        --border: #1e2632;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        line-height: 1.7;
+        font-size: 17px;
+      }
+      a { color: var(--teal); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .wrap { max-width: 720px; margin: 0 auto; padding: 0 1.25rem; }
+      header.site { border-bottom: 1px solid var(--border); padding: 1.5rem 0 1rem; }
+      .brand { display: flex; align-items: center; gap: 0.75rem; }
+      .brand img { width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--teal); }
+      .brand .name { font-size: 1.5rem; font-weight: 700; letter-spacing: 0.02em; color: var(--text); }
+      .brand .tag { color: var(--muted); font-size: 0.95rem; margin: 0.15rem 0 0; }
+      nav { margin-top: 1rem; display: flex; gap: 1.25rem; font-size: 0.95rem; }
+      nav a { color: var(--muted); }
+      nav a:hover, nav a.active { color: var(--amber); text-decoration: none; }
+      main { padding: 2.5rem 0 4rem; }
+      footer.site { border-top: 1px solid var(--border); padding: 1.5rem 0 2.5rem; color: var(--muted); font-size: 0.9rem; }
+      footer.site .links { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
+      .post-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2rem; }
+      .post-list h2 { margin: 0 0 0.25rem; font-size: 1.35rem; }
+      .post-list h2 a { color: var(--text); }
+      .post-list h2 a:hover { color: var(--teal); text-decoration: none; }
+      .post-list time { color: var(--muted); font-size: 0.9rem; }
+      .post-list p { margin: 0.5rem 0 0; color: var(--muted); }
+      article.post h1 { font-size: 2rem; line-height: 1.25; margin: 0 0 0.5rem; }
+      article.post .meta { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; }
+      article.post h2 { color: var(--amber); margin-top: 2.5rem; font-size: 1.4rem; }
+      article.post p { margin: 1.1rem 0; }
+      article.post ul, article.post ol { padding-left: 1.4rem; }
+      article.post li { margin: 0.6rem 0; }
+      article.post blockquote { border-left: 3px solid var(--teal); margin: 1.5rem 0; padding: 0.25rem 0 0.25rem 1rem; color: var(--muted); }
+      article.post table { border-collapse: collapse; width: 100%; margin: 1.5rem 0; font-size: 0.95rem; }
+      article.post th, article.post td { border: 1px solid var(--border); padding: 0.6rem 0.8rem; text-align: left; }
+      article.post th { background: var(--surface); color: var(--amber); }
+      article.post code { background: var(--surface); padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; }
+      article.post pre { background: var(--surface); padding: 1rem; border-radius: 8px; overflow-x: auto; }
+      article.post pre code { background: none; padding: 0; }
+      article.post img { max-width: 100%; border-radius: 8px; }
+      article.post hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+      .canonical-note { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.9rem 1.1rem; font-size: 0.9rem; color: var(--muted); margin-bottom: 2rem; }
+      .hero img { width: 100%; border-radius: 12px; border: 1px solid var(--border); }
+      .archive-year { color: var(--amber); margin: 2rem 0 0.75rem; font-size: 1.2rem; }
+    </style>
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap">
+        <div class="brand">
+          <a href="/"><img src="/avatar.jpg" alt="rohan roots" /></a>
+          <div>
+            <a href="/" class="name">rohan roots</a>
+            <p class="tag">Notes on AI agents, self-hosting, and infra.</p>
+          </div>
+        </div>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/archive">Archive</a>
+          <a href="/rss.xml">RSS</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="wrap">
+        <slot />
+      </div>
+    </main>
+    <footer class="site">
+      <div class="wrap">
+        <div>rohan roots — Notes on AI agents, self-hosting, and infra.</div>
+        <div class="links">
+          <a href="https://x.com/rohanroots">X</a>
+          <a href="https://bsky.app/profile/rohanroots.dev">Bluesky</a>
+          <a href="https://rohanroots.substack.com">Substack</a>
+          <a href="https://dev.to/rohan_roots">Dev.to</a>
+          <a href="https://medium.com/@rohan_roots">Medium</a>
+          <a href="/rss.xml">RSS</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
