@@ -3,7 +3,10 @@ title: "It Took Me Three Days to Install Ubuntu. Ubuntu Wasn't the Problem."
 description: "I thought this would take half an hour. Then the USB stick died, the download crawled, and Windows locked the replacement drive."
 pubDate: 2026-09-21
 canonical: "https://rohanroots.substack.com"
+image: "/blog/ubuntu-cover.png"
 ---
+
+![Ubuntu running on the Lenovo Yoga 720](/blog/ubuntu-cover.png)
 
 For months, my old Lenovo Yoga 720 had been doing what old laptops do best: lying around. Its battery indicator was always stuck at 0 percent, so I did not think much about it. I had quietly accepted that its main job was now collecting dust.
 
@@ -64,6 +67,8 @@ The progress bar reached the green READY state. The replacement drive had never 
 I selected the USB drive from the Lenovo Yoga 720 boot menu. Ubuntu loaded into the live environment, and the installer started.
 
 This laptop was being repurposed, not set up for dual boot, so I erased the internal disk and gave Ubuntu the whole machine. The installation completed, the laptop restarted, and Ubuntu 26.04.1 LTS booted from the internal drive.
+
+![Ubuntu 26.04.1 LTS welcome screen on the Lenovo Yoga 720](/blog/ubuntu-inline.png)
 
 Ubuntu 26.04.1 LTS, finally running on the Lenovo Yoga 720. The first welcome came with 37 updates waiting.
 

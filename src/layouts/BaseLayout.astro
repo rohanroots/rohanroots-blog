@@ -2,11 +2,14 @@
 interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
 
-const { title, description = 'Notes on AI agents, self-hosting, and infra.' } = Astro.props;
+const { title, description = 'Notes on AI agents, self-hosting, and infra.', image = '/header.png' } = Astro.props;
 const siteTitle = 'rohan roots';
+const siteUrl = 'https://rohanroots.dev';
 const fullTitle = title === siteTitle ? title : `${title} — ${siteTitle}`;
+const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 ---
 
 <!doctype html>
@@ -15,6 +18,15 @@ const fullTitle = title === siteTitle ? title : `${title} — ${siteTitle}`;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteTitle} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="icon" type="image/jpeg" href="/avatar.jpg" />
     <link rel="alternate" type="application/rss+xml" title="rohan roots RSS" href="/rss.xml" />
     <title>{fullTitle}</title>
