@@ -1,0 +1,77 @@
+---
+/* Hallmark · genre: editorial · macrostructure: Index-First · theme: Nightshift (custom-tuned) · design-system: design.md · designed-as-app */
+
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+  startAt?: number;
+}
+
+const { posts, startAt = 0 } = Astro.props;
+const iso = (d: Date) => d.toISOString().slice(0, 10);
+---
+
+<ol class="rows">
+  {posts.map((post, i) => (
+    <li class="rows__row">
+      <div class="rows__meta">
+        <span class="rows__num" aria-hidden="true">{String(startAt + i + 1).padStart(2, '0')}</span>
+        <time class="rows__date" datetime={post.data.pubDate.toISOString()}>{iso(post.data.pubDate)}</time>
+      </div>
+      <div class="rows__body">
+        <h2 class="rows__title"><a href={`/blog/${post.id}/`}>{post.data.title}</a></h2>
+        <p class="rows__desc">{post.data.description}</p>
+      </div>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .rows { list-style: none; margin: 0; padding: 0; }
+  .rows__row {
+    display: grid;
+    grid-template-columns: 12ch 1fr;
+    gap: var(--space-md);
+    padding: var(--space-lg) 0;
+    border-top: 1px solid var(--color-rule);
+    align-items: baseline;
+  }
+  .rows__row:last-child { border-bottom: 1px solid var(--color-rule); }
+  .rows__meta { display: flex; flex-direction: column; gap: var(--space-3xs); }
+  .rows__num {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .rows__date {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-ink-2);
+    font-variant-numeric: tabular-nums;
+  }
+  .rows__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-xl);
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    margin: 0 0 var(--space-2xs);
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+  }
+  .rows__title a { color: var(--color-ink); text-decoration: none; }
+  .rows__title a:hover { color: var(--color-accent); }
+  .rows__desc {
+    margin: 0;
+    color: var(--color-ink-2);
+    font-size: var(--text-base);
+    max-width: 52ch;
+  }
+  @media (max-width: 40rem) {
+    .rows__row { grid-template-columns: 1fr; gap: var(--space-xs); }
+    .rows__meta { flex-direction: row; gap: var(--space-xs); align-items: baseline; }
+    .rows__title { font-size: var(--text-lg); }
+  }
+</style>

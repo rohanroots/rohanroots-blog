@@ -1,0 +1,82 @@
+/* Hallmark · genre: editorial · macrostructure: shared-tokens · theme: Nightshift (custom-tuned) · design-system: design.md · designed-as-app */
+
+:root {
+  --color-paper:      oklch(0.162 0.0143 258.4);
+  --color-paper-2:    oklch(0.199 0.0198 262.0);
+  --color-ink:        oklch(0.940 0.0083 271.3);
+  --color-ink-2:      oklch(0.676 0.0267 265.5);
+  --color-rule:       oklch(0.292 0.0303 260.5);
+  --color-accent:     oklch(0.785 0.1325 181.9);
+  --color-accent-ink: oklch(0.272 0.0447 183.0);
+  --color-focus:      oklch(0.785 0.1325 181.9);
+
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "Newsreader", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --space-3xs: 0.25rem;  --space-2xs: 0.5rem;  --space-xs: 0.75rem;
+  --space-sm: 1rem;      --space-md: 1.5rem;   --space-lg: 2rem;
+  --space-xl: 3rem;      --space-2xl: 4.5rem;  --space-3xl: 7rem;
+
+  --text-xs: 0.75rem;   --text-sm: 0.875rem;  --text-base: 1rem;
+  --text-md: 1.0625rem; --text-lg: 1.25rem;   --text-xl: 1.5625rem;
+  --text-2xl: 1.953rem; --text-3xl: 2.441rem;
+  --text-display: clamp(2.75rem, 5vw + 1rem, 4.5rem);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-short: 220ms;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+  --measure: 65ch;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+html, body { overflow-x: clip; }
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  line-height: 1.65;
+  font-variant-numeric: oldstyle-nums;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.gutter { padding-inline: var(--gutter); }
+
+/* Left-biased content column shared by Long Document pages (articles, about).
+   On desktop the column sits left of centre — the asymmetry is the design. */
+.content-left { padding-inline: var(--gutter); }
+
+@media (min-width: 60rem) {
+  .content-left {
+    max-width: 68ch;
+    margin-left: clamp(2rem, 10vw, 12rem);
+    margin-right: auto;
+    padding-inline: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

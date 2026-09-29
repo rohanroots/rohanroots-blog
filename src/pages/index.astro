@@ -1,5 +1,8 @@
 ---
+/* Hallmark · genre: editorial · macrostructure: Index-First · theme: Nightshift (custom-tuned) · design-system: design.md · designed-as-app */
+
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PostRows from '../components/PostRows.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog')).sort(
@@ -8,15 +11,30 @@ const posts = (await getCollection('blog')).sort(
 ---
 
 <BaseLayout title="rohan roots">
-  <ul class="post-list">
-    {posts.map((post) => (
-      <li>
-        <h2><a href={`/blog/${post.id}/`}>{post.data.title}</a></h2>
-        <time datetime={post.data.pubDate.toISOString()}>
-          {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-        </time>
-        <p>{post.data.description}</p>
-      </li>
-    ))}
-  </ul>
+  <div class="home gutter">
+    <p class="home__label">Notes from the on-call shift. Newest first.</p>
+    <PostRows posts={posts} />
+    <p class="home__more"><a href="/archive">Browse the archive &rarr;</a></p>
+  </div>
 </BaseLayout>
+
+<style>
+  .home { max-width: 62rem; margin: 0 auto; }
+  .home__label {
+    font-style: italic;
+    font-size: var(--text-base);
+    color: var(--color-ink-2);
+    margin: 0 0 var(--space-xl);
+  }
+  .home__more { margin: var(--space-xl) 0 0; font-size: var(--text-base); }
+  .home__more a {
+    color: var(--color-ink);
+    white-space: nowrap;
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: color var(--dur-short) var(--ease-out);
+  }
+  .home__more a:hover { color: var(--color-accent); }
+</style>

@@ -1,4 +1,6 @@
 ---
+/* Hallmark · genre: editorial · macrostructure: Long Document · theme: Nightshift (custom-tuned) · design-system: design.md · designed-as-app */
+
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
 
@@ -12,42 +14,155 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const date = post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const iso = post.data.pubDate.toISOString().slice(0, 10);
+const longDate = post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const minutes = Math.max(1, Math.round(post.body.split(/\s+/).length / 200));
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description} image={post.data.image}>
-  <article class="post">
-    <h1>{post.data.title}</h1>
-    <div class="meta">
-      <time datetime={post.data.pubDate.toISOString()}>{date}</time>
+  <article class="doc content-left">
+    <header class="doc__header">
+      <p class="doc__kicker">
+        <time datetime={post.data.pubDate.toISOString()}>{longDate}</time>
+        <span aria-hidden="true"> · </span>{minutes} min read
+      </p>
+      <h1 class="doc__title">{post.data.title}</h1>
+      <p class="doc__lede">{post.data.description}</p>
       {post.data.canonical && (
-        <div class="canonical-note" style="margin-top: 1rem;">
+        <p class="canonical-note">
           Originally published on <a href={post.data.canonical}>Substack</a>.
-        </div>
+        </p>
       )}
+    </header>
+    <div class="doc__body">
+      <Content />
     </div>
-    <Content />
   </article>
 </BaseLayout>
 
 <style>
   /* Article content styles live here (not in BaseLayout): Astro scopes
      selectors to the component that renders the markup, so these must sit
-     next to <article class="post"> to match. Markdown descendants still
+     next to <article class="doc"> to match. Markdown descendants still
      need :global() since markdown elements get no scope attribute. */
-  .post h1 { font-size: 2rem; line-height: 1.25; margin: 0 0 0.5rem; }
-  .post .meta { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; }
-  .post :global(h2) { color: var(--amber); margin-top: 2.5rem; font-size: 1.4rem; }
-  .post :global(p) { margin: 1.1rem 0; }
-  .post :global(ul), .post :global(ol) { padding-left: 1.4rem; }
-  .post :global(li) { margin: 0.6rem 0; }
-  .post :global(blockquote) { border-left: 3px solid var(--teal); margin: 1.5rem 0; padding: 0.25rem 0 0.25rem 1rem; color: var(--muted); }
-  .post :global(table) { border-collapse: collapse; width: 100%; margin: 1.5rem 0; font-size: 0.95rem; }
-  .post :global(th), .post :global(td) { border: 1px solid var(--border); padding: 0.6rem 0.8rem; text-align: left; }
-  .post :global(th) { background: var(--surface); color: var(--amber); }
-  .post :global(code) { background: var(--surface); padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; }
-  .post :global(pre) { background: var(--surface); padding: 1rem; border-radius: 8px; overflow-x: auto; }
-  .post :global(pre code) { background: none; padding: 0; }
-  .post :global(img) { max-width: 100%; height: auto; border-radius: 8px; }
-  .post :global(hr) { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .doc__header { padding-bottom: var(--space-xl); border-bottom: 1px solid var(--color-rule); margin-bottom: var(--space-2xl); }
+  .doc__kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-2);
+    margin: 0 0 var(--space-md);
+    font-variant-numeric: tabular-nums;
+  }
+  .doc__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-display);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--space-md);
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+  }
+  .doc__lede {
+    font-size: var(--text-lg);
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--color-ink-2);
+    margin: 0;
+    max-width: 55ch;
+  }
+  .canonical-note {
+    border-left: 2px solid var(--color-accent);
+    padding: var(--space-2xs) 0 var(--space-2xs) var(--space-md);
+    color: var(--color-ink-2);
+    font-size: var(--text-sm);
+    margin: var(--space-lg) 0 0;
+  }
+  .canonical-note a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .doc__body { counter-reset: section; }
+  .doc__body :global(p) { margin: 0 0 var(--space-md); }
+  .doc__body :global(h2) {
+    counter-increment: section;
+    display: grid;
+    grid-template-columns: 3.5ch 1fr;
+    gap: var(--space-sm);
+    align-items: baseline;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-xl);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    margin: var(--space-2xl) 0 var(--space-md);
+  }
+  .doc__body :global(h2::before) {
+    content: counter(section, decimal-leading-zero);
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .doc__body :global(h3) {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-lg);
+    letter-spacing: -0.01em;
+    margin: var(--space-xl) 0 var(--space-sm);
+  }
+  .doc__body :global(a) {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: color var(--dur-short) var(--ease-out);
+  }
+  .doc__body :global(a:hover) { color: var(--color-accent); }
+  .doc__body :global(ul), .doc__body :global(ol) { padding-left: 1.4rem; margin: 0 0 var(--space-md); }
+  .doc__body :global(li) { margin: var(--space-2xs) 0; }
+  .doc__body :global(li::marker) { color: var(--color-accent); }
+  .doc__body :global(blockquote) {
+    border-left: 2px solid var(--color-accent);
+    margin: var(--space-lg) 0;
+    padding: var(--space-2xs) 0 var(--space-2xs) var(--space-md);
+    font-style: italic;
+    color: var(--color-ink);
+  }
+  .doc__body :global(blockquote p) { margin: 0; }
+  .doc__body :global(table) { border-collapse: collapse; width: 100%; margin: var(--space-lg) 0; font-size: var(--text-sm); }
+  .doc__body :global(th), .doc__body :global(td) { border: 1px solid var(--color-rule); padding: var(--space-xs) var(--space-sm); text-align: left; }
+  .doc__body :global(th) { background: var(--color-paper-2); font-family: var(--font-mono); font-weight: 500; font-size: var(--text-xs); letter-spacing: 0.04em; }
+  .doc__body :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--color-paper-2);
+    border: 1px solid var(--color-rule);
+    border-radius: 4px;
+    padding: 0.15em 0.4em;
+  }
+  .doc__body :global(pre) {
+    background: var(--color-paper-2);
+    border: 1px solid var(--color-rule);
+    padding: var(--space-md);
+    overflow-x: auto;
+    font-size: var(--text-sm);
+    line-height: 1.6;
+  }
+  .doc__body :global(pre code) { background: none; border: 0; padding: 0; font-size: inherit; }
+  .doc__body :global(img) {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--color-rule);
+    display: block;
+    margin: var(--space-lg) 0;
+  }
+  .doc__body :global(hr) { border: none; border-top: 1px solid var(--color-rule); margin: var(--space-2xl) 0; }
+  .doc__body :global(strong) { font-weight: 600; }
 </style>

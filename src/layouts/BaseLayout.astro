@@ -1,4 +1,8 @@
 ---
+/* Hallmark · genre: editorial · macrostructure: site-chrome · theme: Nightshift (custom-tuned) · nav: N6 · footer: Ft4 · design-system: design.md · designed-as-app */
+
+import '../styles/tokens.css';
+
 interface Props {
   title: string;
   description?: string;
@@ -10,6 +14,8 @@ const siteTitle = 'rohan roots';
 const siteUrl = 'https://rohanroots.dev';
 const fullTitle = title === siteTitle ? title : `${title} — ${siteTitle}`;
 const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
 
 <!doctype html>
@@ -29,85 +35,112 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
     <meta name="twitter:image" content={ogImage} />
     <link rel="icon" type="image/jpeg" href="/avatar.jpg" />
     <link rel="alternate" type="application/rss+xml" title="rohan roots RSS" href="/rss.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,100..900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <title>{fullTitle}</title>
     <style>
-      :root {
-        --bg: #0a0e14;
-        --surface: #10151d;
-        --text: #e6e9ef;
-        --muted: #8b93a3;
-        --teal: #2dd4bf;
-        --amber: #f5a524;
-        --border: #1e2632;
+      /* N6 newspaper masthead + Ft4 colophon. Knobs: issue-line above wordmark,
+         wordmark 2xl lowercase, double rule below. */
+      .masthead { text-align: center; padding: var(--space-xl) var(--gutter) 0; }
+      .masthead__line {
+        font-variant-caps: all-small-caps;
+        letter-spacing: 0.14em;
+        font-size: var(--text-xs);
+        color: var(--color-ink-2);
+        margin: 0 0 var(--space-sm);
       }
-      * { box-sizing: border-box; }
-      body {
+      .masthead__wordmark {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        letter-spacing: -0.02em;
+        line-height: 1;
+        color: var(--color-ink);
+        text-decoration: none;
+        display: inline-block;
+        overflow-wrap: anywhere;
+      }
+      .masthead__wordmark:hover { color: var(--color-accent); }
+      .masthead__nav {
+        margin-top: var(--space-md);
+        display: flex;
+        justify-content: center;
+        gap: var(--space-lg);
+        font-size: var(--text-sm);
+      }
+      .masthead__nav a {
+        color: var(--color-ink-2);
+        text-decoration: none;
+        white-space: nowrap;
+        padding-bottom: 3px;
+        border-bottom: 1px solid transparent;
+        transition: color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out);
+      }
+      .masthead__nav a:hover { color: var(--color-ink); }
+      .masthead__nav a[aria-current="page"] {
+        color: var(--color-accent);
+        border-bottom-color: var(--color-accent);
+      }
+      .masthead__rule {
+        border: 0;
+        border-top: 1px solid var(--color-rule);
+        border-bottom: 1px solid var(--color-rule);
+        height: 5px;
+        margin: var(--space-md) 0 0;
+      }
+      main { padding: var(--space-2xl) 0 var(--space-3xl); }
+      .colophon {
+        border-top: 1px solid var(--color-rule);
+        padding-block: var(--space-lg);
+      }
+      .colophon p {
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        line-height: 1.9;
+        color: var(--color-ink-2);
         margin: 0;
-        background: var(--bg);
-        color: var(--text);
-        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-        line-height: 1.7;
-        font-size: 17px;
+        max-width: 90ch;
       }
-      a { color: var(--teal); text-decoration: none; }
-      a:hover { text-decoration: underline; }
-      .wrap { max-width: 720px; margin: 0 auto; padding: 0 1.25rem; }
-      header.site { border-bottom: 1px solid var(--border); padding: 1.5rem 0 1rem; }
-      .brand { display: flex; align-items: center; gap: 0.75rem; }
-      .brand img { width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--teal); }
-      .brand .name { font-size: 1.5rem; font-weight: 700; letter-spacing: 0.02em; color: var(--text); }
-      .brand .tag { color: var(--muted); font-size: 0.95rem; margin: 0.15rem 0 0; }
-      nav { margin-top: 1rem; display: flex; gap: 1.25rem; font-size: 0.95rem; }
-      nav a { color: var(--muted); }
-      nav a:hover, nav a.active { color: var(--amber); text-decoration: none; }
-      main { padding: 2.5rem 0 4rem; }
-      footer.site { border-top: 1px solid var(--border); padding: 1.5rem 0 2.5rem; color: var(--muted); font-size: 0.9rem; }
-      footer.site .links { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
-      .post-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2rem; }
-      .post-list h2 { margin: 0 0 0.25rem; font-size: 1.35rem; }
-      .post-list h2 a { color: var(--text); }
-      .post-list h2 a:hover { color: var(--teal); text-decoration: none; }
-      .post-list time { color: var(--muted); font-size: 0.9rem; }
-      .post-list p { margin: 0.5rem 0 0; color: var(--muted); }
-      :global(.canonical-note) { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.9rem 1.1rem; font-size: 0.9rem; color: var(--muted); margin-bottom: 2rem; }
-      .archive-year { color: var(--amber); margin: 2rem 0 0.75rem; font-size: 1.2rem; }
+      .colophon a {
+        color: var(--color-ink-2);
+        text-decoration: underline;
+        text-decoration-color: var(--color-rule);
+        text-underline-offset: 2px;
+      }
+      .colophon a:hover {
+        color: var(--color-accent);
+        text-decoration-color: var(--color-accent);
+      }
+      @media (max-width: 40rem) {
+        .masthead__nav { gap: var(--space-md); flex-wrap: wrap; }
+      }
     </style>
   </head>
   <body>
-    <header class="site">
-      <div class="wrap">
-        <div class="brand">
-          <a href="/"><img src="/avatar.jpg" alt="rohan roots" /></a>
-          <div>
-            <a href="/" class="name">rohan roots</a>
-            <p class="tag">Notes on AI agents, self-hosting, and infra.</p>
-          </div>
-        </div>
-        <nav>
-          <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/archive">Archive</a>
-          <a href="/rss.xml">RSS</a>
-        </nav>
-      </div>
+    <header class="masthead">
+      <p class="masthead__line">Notes on AI agents, self-hosting, and infra.</p>
+      <a class="masthead__wordmark" href="/">rohan roots</a>
+      <nav class="masthead__nav" aria-label="Primary">
+        <a href="/" aria-current={isCurrent('/') ? 'page' : undefined}>Home</a>
+        <a href="/about" aria-current={isCurrent('/about') ? 'page' : undefined}>About</a>
+        <a href="/archive" aria-current={isCurrent('/archive') ? 'page' : undefined}>Archive</a>
+        <a href="/rss.xml">RSS</a>
+      </nav>
+      <hr class="masthead__rule" aria-hidden="true" />
     </header>
     <main>
-      <div class="wrap">
-        <slot />
-      </div>
+      <slot />
     </main>
-    <footer class="site">
-      <div class="wrap">
-        <div>rohan roots — Notes on AI agents, self-hosting, and infra.</div>
-        <div class="links">
-          <a href="https://x.com/rohanroots">X</a>
-          <a href="https://bsky.app/profile/rohanroots.dev">Bluesky</a>
-          <a href="https://rohanroots.substack.com">Substack</a>
-          <a href="https://dev.to/rohan_roots">Dev.to</a>
-          <a href="https://medium.com/@rohan_roots">Medium</a>
-          <a href="/rss.xml">RSS</a>
-        </div>
-      </div>
+    <footer class="colophon gutter">
+      <p>
+        rohan roots &mdash; set in Fraunces, Newsreader &amp; JetBrains Mono.
+        Built with Astro, shipped on Cloudflare Pages. No trackers, no cookies.
+        <a href="/rss.xml">RSS</a>
+      </p>
     </footer>
   </body>
 </html>

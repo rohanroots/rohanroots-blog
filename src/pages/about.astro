@@ -1,23 +1,86 @@
 ---
+/* Hallmark · genre: editorial · macrostructure: Long Document · theme: Nightshift (custom-tuned) · design-system: design.md · designed-as-app */
+
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="About">
-  <div class="hero" style="margin-bottom: 2rem;">
-    <img src="/header.png" alt="rohan roots" />
+  <div class="about content-left">
+    <p class="about__kicker">About</p>
+    <h1 class="about__statement">SRE. K8s, Linux, AI infra.</h1>
+    <p class="about__aside">That&rsquo;s pretty much it.</p>
+    <figure class="about__figure">
+      <img src="/header.png" alt="rohan roots" />
+    </figure>
+    <div class="about__prose">
+      <p>
+        I write about what breaks at 2am and why: Kubernetes operations, Linux
+        systems, self-hosted infrastructure, and the occasional AI agent
+        experiment. Everything here is from the on-call SRE&rsquo;s point of view,
+        not a tutorial account&rsquo;s.
+      </p>
+      <h2 class="about__elsewhere">Elsewhere</h2>
+      <ul class="about__links">
+        <li><a href="https://x.com/rohanroots">X &nearr;</a></li>
+        <li><a href="https://bsky.app/profile/rohanroots.dev">Bluesky &nearr;</a></li>
+        <li><a href="https://rohanroots.substack.com">Substack &nearr;</a></li>
+        <li><a href="https://dev.to/rohan_roots">Dev.to &nearr;</a></li>
+        <li><a href="https://medium.com/@rohan_roots">Medium &nearr;</a></li>
+      </ul>
+    </div>
   </div>
-  <h1>About</h1>
-  <p>SRE. K8s, Linux, AI infra. That's pretty much it.</p>
-  <p>
-    I write about what breaks at 2am and why: Kubernetes operations, Linux
-    systems, self-hosted infrastructure, and the occasional AI agent
-    experiment. Everything here is from the on-call SRE's point of view,
-    not a tutorial account's.
-  </p>
-  <p>You can also find me on <a href="https://x.com/rohanroots">X</a>, <a href="https://bsky.app/profile/rohanroots.dev">Bluesky</a>, <a href="https://rohanroots.substack.com">Substack</a>, <a href="https://dev.to/rohan_roots">Dev.to</a>, and <a href="https://medium.com/@rohan_roots">Medium</a>.</p>
 </BaseLayout>
 
 <style>
-  /* Scoped here so it matches: the .hero div is rendered by this page. */
-  .hero img { width: 100%; border-radius: 12px; border: 1px solid var(--border); }
+  .about__kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-2);
+    margin: 0 0 var(--space-md);
+  }
+  .about__statement {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--space-xs);
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+  }
+  .about__aside {
+    font-style: italic;
+    color: var(--color-ink-2);
+    font-size: var(--text-lg);
+    margin: 0 0 var(--space-2xl);
+  }
+  .about__figure { margin: 0 0 var(--space-2xl); }
+  .about__figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--color-rule);
+  }
+  .about__prose p { margin: 0 0 var(--space-md); }
+  .about__elsewhere {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-xl);
+    letter-spacing: -0.01em;
+    margin: var(--space-2xl) 0 var(--space-md);
+  }
+  .about__links { list-style: none; margin: 0; padding: 0; }
+  .about__links li {
+    padding: var(--space-sm) 0;
+    border-top: 1px solid var(--color-rule);
+  }
+  .about__links li:last-child { border-bottom: 1px solid var(--color-rule); }
+  .about__links a {
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: color var(--dur-short) var(--ease-out);
+  }
+  .about__links a:hover { color: var(--color-accent); }
 </style>

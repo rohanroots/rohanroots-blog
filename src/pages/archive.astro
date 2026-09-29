@@ -1,5 +1,8 @@
 ---
+/* Hallmark · genre: editorial · macrostructure: Index-First · theme: Nightshift (custom-tuned) · design-system: design.md · designed-as-app */
+
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PostRows from '../components/PostRows.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog')).sort(
@@ -16,20 +19,41 @@ const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
 ---
 
 <BaseLayout title="Archive">
-  <h1>Archive</h1>
-  {years.map((year) => (
-    <div>
-      <h2 class="archive-year">{year}</h2>
-      <ul class="post-list">
-        {byYear[year].map((post) => (
-          <li>
-            <h2><a href={`/blog/${post.id}/`}>{post.data.title}</a></h2>
-            <time datetime={post.data.pubDate.toISOString()}>
-              {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-            </time>
-          </li>
-        ))}
-      </ul>
-    </div>
-  ))}
+  <div class="archive gutter">
+    <p class="archive__label">Everything, by year.</p>
+    {years.map((year) => (
+      <section class="archive__year" aria-label={year}>
+        <h2 class="archive__year-label">{year}</h2>
+        <PostRows posts={byYear[year]} />
+      </section>
+    ))}
+  </div>
 </BaseLayout>
+
+<style>
+  .archive { max-width: 62rem; margin: 0 auto; }
+  .archive__label {
+    font-style: italic;
+    font-size: var(--text-base);
+    color: var(--color-ink-2);
+    margin: 0 0 var(--space-2xl);
+  }
+  .archive__year { margin-bottom: var(--space-2xl); }
+  .archive__year:last-child { margin-bottom: 0; }
+  .archive__year-label {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-2xl);
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--space-md);
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+  }
+  .archive__year-label::after {
+    content: "";
+    display: block;
+    width: 3rem;
+    border-top: 2px solid var(--color-accent);
+    margin-top: var(--space-xs);
+  }
+</style>
