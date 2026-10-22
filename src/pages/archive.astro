@@ -37,26 +37,19 @@ const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
     font-weight: 400;
     font-size: var(--text-base);
     color: var(--color-ink-2);
-    margin: 0 0 var(--space-2xl);
+    margin: 0 0 var(--space-lg);
   }
   .archive__year { margin-bottom: var(--space-2xl); }
   .archive__year:last-child { margin-bottom: 0; }
   .archive__year-label {
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: var(--text-2xl);
+    font-size: var(--text-3xl);
     letter-spacing: -0.01em;
     margin: 0 0 var(--space-md);
     color: var(--color-ink);
     overflow-wrap: break-word;
     min-width: 0;
     text-wrap: balance;
-  }
-  .archive__year-label::after {
-    content: "";
-    display: block;
-    width: 3rem;
-    border-top: 2px solid var(--color-accent);
-    margin-top: var(--space-xs);
   }
 </style>

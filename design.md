@@ -189,4 +189,9 @@ credits, RSS. Ragged-right, muted. No link farm — Elsewhere lives on /about.
   actually use the full-gutter grid this file always prescribed, its rows at
   one strength, the numeral and hairlines carrying the hierarchy, and the
   index sits closer under the masthead (main top padding and the intro
-  margin tightened) after hero review.
+  margin tightened) after hero review. Finish review then settled four
+  details: the index grid narrowed and title balancing dropped so a row
+  reads as one entry; the archive year is a true section head at
+  --text-3xl with no decorative tick; Elsewhere links are underlined at
+  rest in the C3 voice (the arrow stays out); and post tables are unfilled
+  ruled rows, no boxed or filled cells anywhere in the system.

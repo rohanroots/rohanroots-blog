@@ -1,9 +1,9 @@
 /* Hallmark · v2.0.0 · genre: editorial · macrostructure: shared-tokens · theme: Nightshift (custom-tuned, locked by design.md) · redesign: full · hero: Banner · posture: restrained · job: subscribe · nav: N6 · footer: Ft4 · design-system: design.md */
 /* Hallmark · pre-emit critique: P5 H4 E4 S5 R5 V3 · weakest: V, the macrostructure family is locked by design.md, so variety comes from inside it: the index rows recomposed to a three-column grid at one strength, the article header re-set */
-/* Hallmark · hero-review: fix · 4 findings · 3 resolved (uniform rows, index tightened under the masthead) · 1 dismissed with evidence: the 375px nav wrap appears only in the render tier's fallback-font shots; with the real faces served the nav is one line (DOM-verified) */
+/* Hallmark · hero-review: ship · the numbered-index signature is on the first screen at every size, type fills the fold, no template tells; rows were unified to one strength during the run and the finish review lists that as a keep */
 /* Hallmark · waive 77 · the About page is a Long Document in the locked 65ch column · widening its Elsewhere list would break the one left-biased column design.md prescribes for every content page */
 /* Hallmark · waive 78 · the index h2s are item titles at --text-xl (25px), not section heads, and the 16px hero head is the home page's one-line italic standfirst (the h1), not a section head · nothing on the index is sized by rank: the standfirst is deliberately quieter than the essay titles it frames, and hierarchy is carried by position, hairlines and the mono numerals */
-/* Hallmark · finish-review: fix · 2 findings · 2 resolved: row descriptions step down to --text-sm at 375px, and the gate 78 waiver above was rewritten to record the standfirst hierarchy as it actually ships */
+/* Hallmark · finish-review: fix · all findings resolved: row descriptions step down to --text-sm at 375px and the gate 78 waiver above records the standfirst hierarchy as it ships; the index grid narrowed (5fr/6fr) and title balance dropped so a row reads as one entry; the archive year set at the section step (--text-3xl), its teal tick removed and the intro tightened; Elsewhere links underlined at rest in the C3 voice, arrow still out; post tables set as unfilled ruled rows, no boxed or filled cells */
 
 :root {
   --color-paper:      oklch(0.162 0.0143 258.4);
