@@ -1,87 +1,69 @@
-/* Hallmark · v2.0.0 · genre: editorial · macrostructure: shared-tokens · theme: Nightshift (custom-tuned, locked by design.md) · redesign: full · hero: Banner · posture: restrained · job: subscribe · nav: N6 · footer: Ft4 · design-system: design.md */
-/* Hallmark · pre-emit critique: P5 H4 E4 S5 R5 V3 · weakest: V, the macrostructure family is locked by design.md, so variety comes from inside it: the index rows recomposed to a three-column grid at one strength, the article header re-set */
-/* Hallmark · hero-review: ship · the numbered-index signature is on the first screen at every size, type fills the fold, no template tells; rows were unified to one strength during the run and the finish review lists that as a keep */
-/* Hallmark · waive 77 · the About page is a Long Document in the locked 65ch column · widening its Elsewhere list would break the one left-biased column design.md prescribes for every content page */
-/* Hallmark · waive 78 · the index h2s are item titles at --text-xl (25px), not section heads, and the 16px hero head is the home page's one-line italic standfirst (the h1), not a section head · nothing on the index is sized by rank: the standfirst is deliberately quieter than the essay titles it frames, and hierarchy is carried by position, hairlines and the mono numerals */
-/* Hallmark · finish-review: fix · all findings resolved: row descriptions step down to --text-sm at 375px and the gate 78 waiver above records the standfirst hierarchy as it ships; the index grid narrowed (5fr/6fr) and title balance dropped so a row reads as one entry; the archive year set at the section step (--text-3xl), its teal tick removed and the intro tightened; Elsewhere links underlined at rest in the C3 voice, arrow still out; post tables set as unfilled ruled rows, no boxed or filled cells */
+/* Hallmark · v2.0.0 · shape: the Logbook (margin rail, ruled entries) · genre: atmospheric · theme: custom · idea: "Every post is an entry in a working logbook, ruled in red ink down the margin" · vibe: "bound logbook, red ink, night desk" · redesign: full · job: subscribe
+ * paper: oklch(0.150 0.012 158) green-black book cloth · accent: oklch(0.650 0.170 33) red ink · display: Clash Display · body: Spectral · outlier: IBM Plex Mono (the technical register: figures, dates, code, colophon)
+ * hero: the opened logbook — wordmark and tagline in the endpaper rail, the standfirst and the first ruled entries in the column, the current entry's cover pasted in as a plate · nav: the margin rail, wordmark at its head and links down it on desktop, a ruled row under the wordmark on mobile · footer: the endpaper colophon · imagery: the posts' own covers as plates · signature: the red margin rule ruled down the record itself, with every entry's number and date hung on it in the margin
+ * axes: dark/grotesk-heavy/chromatic-orange · posture: restrained · contrast: pass · fold: pass */
+/* Hallmark · pre-emit critique: P4 H5 E4 S5 R4 V5 · weakest: P, a logbook can read as a conceit; it earns its place because the rail does the page's record-keeping (numbers, dates, read times) instead of decorating it, and the accent stays a 1px rule and figures */
+/* Hallmark · waive 79 · the 1440 hero capture keeps the standfirst, entry 01 and the top of its cover plate above the fold in the column beside the rail · the first screen is the opened logbook, split between the margin rail and the entry column, so a hero box that ends at the rail is not an empty band on this page */
+/* Hallmark · hero-review: fix · 4 findings · all resolved on recapture: numbers hung on the red rule through the record, the rail made an endpaper band, the current entry's cover pasted in as a plate, display word-spacing set */
+/* Hallmark · waive 77 · every route keeps exactly the sections its source has always had and gains none · a blog is a record, not a landing strip; the six-to-nine-sections fix would mean inventing sections and copy the pages do not have */
+/* Hallmark · finish-review: fix · 6 findings · 5 resolved: article margin slimmed to the number alone so phone posts read at near full width, section counters removed so the margin number is the only numbering, colophon pulled up to the record and its RSS space restored, Elsewhere rows capped at measure, plates treated one step quieter · 1 rejected on the record: the About statement is the site's fixed copy, kept verbatim */
+/* Hallmark · waive 59 · the join between the record's last ruled line and the colophon stays at or above the 64px rhythm that separates entries inside the record · the colophon is the book's endpaper, a closing device rather than a new section; the 120px floor guards landing-page section joins, and at that gap the tail read as a dead band in the finish review */
 
 :root {
-  --color-paper:      oklch(0.162 0.0143 258.4);
-  --color-paper-2:    oklch(0.199 0.0198 262.0);
-  --color-ink:        oklch(0.940 0.0083 271.3);
-  --color-ink-2:      oklch(0.676 0.0267 265.5);
-  --color-rule:       oklch(0.292 0.0303 260.5);
-  --color-accent:     oklch(0.785 0.1325 181.9);
-  --color-accent-ink: oklch(0.272 0.0447 183.0);
-  --color-focus:      oklch(0.785 0.1325 181.9);
-
-  --font-display: "Fraunces", ui-serif, Georgia, serif;
-  --font-body: "Newsreader", ui-serif, Georgia, serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-
-  --space-3xs: 0.25rem;  --space-2xs: 0.5rem;  --space-xs: 0.75rem;
-  --space-sm: 1rem;      --space-md: 1.5rem;   --space-lg: 2rem;
-  --space-xl: 3rem;      --space-2xl: 4.5rem;  --space-3xl: 7rem;
-
-  --text-xs: 0.75rem;   --text-sm: 0.875rem;  --text-base: 1rem;
-  --text-md: 1.0625rem; --text-lg: 1.25rem;   --text-xl: 1.5625rem;
-  --text-2xl: 1.953rem; --text-3xl: 2.441rem;
-  --text-display: clamp(2.75rem, 5vw + 1rem, 4.5rem);
-
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --dur-short: 220ms;
-  --gutter: clamp(1.25rem, 5vw, 3rem);
-  --measure: 65ch;
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
+  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1.0625rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
+  --text-display-s: clamp(2.25rem, 4vw + 0.5rem, 3.75rem); --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
+  --text-section: clamp(2rem, 2.5vw + 1rem, 3.5rem); --text-title: clamp(1.75rem, 1.5vw + 1.25rem, 2.75rem);
+  --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
+  --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
+  --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
+  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
+  --color-paper: oklch(0.150 0.012 158); --color-paper-2: oklch(0.185 0.014 158); --color-paper-3: oklch(0.228 0.016 158);
+  --color-ink: oklch(0.930 0.010 95); --color-ink-2: oklch(0.740 0.014 110); --color-muted: oklch(0.620 0.012 130);
+  --color-rule: oklch(0.300 0.014 158);
+  --color-accent: oklch(0.650 0.170 33); --color-accent-ink: oklch(0.160 0.030 33); --color-focus: oklch(0.660 0.200 33);
+  --font-display: "Clash Display", system-ui, sans-serif; --font-body: "Spectral", Georgia, serif; --font-outlier: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --radius-card: 2px; --radius-pill: 999px; --rule-hair: 1px; --shadow-card: none;
+  --tracking-display: -0.01em;
+  --rail: 11rem; --measure: 62ch;
 }
 
-*, *::before, *::after { box-sizing: border-box; }
-
-html { -webkit-text-size-adjust: 100%; }
-
-html, body { overflow-x: clip; }
-
-body {
-  margin: 0;
-  background: var(--color-paper);
-  color: var(--color-ink);
-  font-family: var(--font-body);
-  font-size: var(--text-md);
-  line-height: 1.65;
-  font-variant-numeric: oldstyle-nums;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+/* Self-hosted faces (Clash Display via Fontshare, Spectral and IBM Plex Mono
+   under the OFL): the site ships its own type, no third-party requests. */
+@font-face {
+  font-family: "Clash Display";
+  src: url("/fonts/clash-display-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
-
-::selection {
-  background: var(--color-accent);
-  color: var(--color-accent-ink);
+@font-face {
+  font-family: "Spectral";
+  src: url("/fonts/spectral-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
-
-a { color: inherit; }
-
-:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 3px;
+@font-face {
+  font-family: "Spectral";
+  src: url("/fonts/spectral-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
 }
-
-.gutter { padding-inline: var(--gutter); }
-
-/* Left-biased content column shared by Long Document pages (articles, about).
-   On desktop the column sits left of centre — the asymmetry is the design. */
-.content-left { padding-inline: var(--gutter); }
-
-@media (min-width: 60rem) {
-  .content-left {
-    max-width: 68ch;
-    margin-left: clamp(2rem, 10vw, 12rem);
-    margin-right: auto;
-    padding-inline: 0;
-  }
+@font-face {
+  font-family: "Spectral";
+  src: url("/fonts/spectral-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-  }
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/ibm-plex-mono-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }

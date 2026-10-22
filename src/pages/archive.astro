@@ -1,5 +1,5 @@
 ---
-/* Hallmark · v2.0.0 · genre: editorial · macrostructure: Index-First · theme: Nightshift (custom-tuned, locked by design.md) · redesign: full · hero: Banner · design-system: design.md */
+/* Hallmark · v2.0.0 · genre: atmospheric · theme: custom (the Logbook) · redesign: full · the back record: every entry by year, numbered through the book */
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostRows from '../components/PostRows.astro';
@@ -16,36 +16,49 @@ const byYear = posts.reduce<Record<string, typeof posts>>((acc, post) => {
 }, {});
 
 const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
+const offsets: Record<string, number> = {};
+{
+  let seen = 0;
+  for (const year of years) {
+    offsets[year] = seen;
+    seen += byYear[year].length;
+  }
+}
 ---
 
 <BaseLayout title="Archive">
-  <div class="archive gutter">
+  <div class="archive">
     <h1 class="archive__head">Everything, by year.</h1>
     {years.map((year) => (
       <section class="archive__year" aria-label={year}>
         <h2 class="archive__year-label">{year}</h2>
-        <PostRows posts={byYear[year]} />
+        <PostRows posts={byYear[year]} startAt={offsets[year]} />
       </section>
     ))}
   </div>
 </BaseLayout>
 
 <style>
-  .archive { max-width: 90rem; margin: 0 auto; }
   .archive__head {
-    font-style: italic;
-    font-weight: 400;
-    font-size: var(--text-base);
-    color: var(--color-ink-2);
-    margin: 0 0 var(--space-lg);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-display-s);
+    letter-spacing: var(--tracking-display);
+    line-height: 1.08;
+    color: var(--color-ink);
+    margin: 0 0 var(--space-2xl);
+    overflow-wrap: break-word;
+    min-width: 0;
+    text-wrap: balance;
   }
-  .archive__year { margin-bottom: var(--space-2xl); }
+  .archive__year { margin-bottom: var(--space-3xl); }
   .archive__year:last-child { margin-bottom: 0; }
   .archive__year-label {
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: var(--text-3xl);
-    letter-spacing: -0.01em;
+    font-size: var(--text-section);
+    letter-spacing: var(--tracking-display);
+    line-height: 1.1;
     margin: 0 0 var(--space-md);
     color: var(--color-ink);
     overflow-wrap: break-word;

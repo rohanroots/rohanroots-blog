@@ -1,61 +1,73 @@
 ---
-/* Hallmark · v2.0.0 · genre: editorial · macrostructure: Long Document · theme: Nightshift (custom-tuned, locked by design.md) · redesign: full · hero: Banner · design-system: design.md */
+/* Hallmark · v2.0.0 · genre: atmospheric · theme: custom (the Logbook) · redesign: full · the author page: the role noted in the margin, statement and portrait plate in the column */
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="About">
   <div class="about content-left">
-    <header class="about__head">
-      <h1 class="about__statement">Ten years of keeping things running.</h1>
-      <p class="about__aside">Platform Engineer</p>
-      <figure class="about__figure">
-        <img src="/header.png" alt="rohan roots" width="2736" height="912" />
-      </figure>
-    </header>
-    <div class="about__prose">
-      <p>
-        I&rsquo;ve worked in IT for over 10 years. Started as a sys admin, moved
-        through DevOps and platform engineering, and now work as an SRE. The
-        throughline never changed: someone has to keep the systems up, and most
-        of what I know came from the nights they weren&rsquo;t.
-      </p>
-      <p>
-        I write about what breaks at 2am and why: Kubernetes operations, Linux
-        systems, self-hosted infrastructure, and the occasional AI agent
-        experiment. Everything here is from the on-call SRE&rsquo;s point of view,
-        not a tutorial account&rsquo;s.
-      </p>
-      <h2 class="about__elsewhere">Elsewhere</h2>
-      <ul class="about__links">
-        <li><a href="https://x.com/rohanroots">X</a></li>
-        <li><a href="https://bsky.app/profile/rohanroots.dev">Bluesky</a></li>
-        <li><a href="https://rohanroots.substack.com">Substack</a></li>
-        <li><a href="https://dev.to/rohan_roots">Dev.to</a></li>
-        <li><a href="https://medium.com/@rohan_roots">Medium</a></li>
-      </ul>
+    <p class="about__aside">Platform Engineer</p>
+    <span class="about__rule" aria-hidden="true"></span>
+    <div class="about__col">
+      <header class="about__head">
+        <h1 class="about__statement">Ten years of keeping things running.</h1>
+        <figure class="about__figure">
+          <img src="/header.png" alt="rohan roots" width="2736" height="912" />
+        </figure>
+      </header>
+      <div class="about__prose">
+        <p>
+          I&rsquo;ve worked in IT for over 10 years. Started as a sys admin, moved
+          through DevOps and platform engineering, and now work as an SRE. The
+          throughline never changed: someone has to keep the systems up, and most
+          of what I know came from the nights they weren&rsquo;t.
+        </p>
+        <p>
+          I write about what breaks at 2am and why: Kubernetes operations, Linux
+          systems, self-hosted infrastructure, and the occasional AI agent
+          experiment. Everything here is from the on-call SRE&rsquo;s point of view,
+          not a tutorial account&rsquo;s.
+        </p>
+        <h2 class="about__elsewhere">Elsewhere</h2>
+        <ul class="about__links">
+          <li><a href="https://x.com/rohanroots">X</a></li>
+          <li><a href="https://bsky.app/profile/rohanroots.dev">Bluesky</a></li>
+          <li><a href="https://rohanroots.substack.com">Substack</a></li>
+          <li><a href="https://dev.to/rohan_roots">Dev.to</a></li>
+          <li><a href="https://medium.com/@rohan_roots">Medium</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </BaseLayout>
 
 <style>
-  .about__head { padding-top: var(--space-lg); }
-  .about__statement {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    margin: 0 0 var(--space-xs);
-    text-wrap: balance;
-    overflow-wrap: break-word;
-    min-width: 0;
+  .about {
+    display: grid;
+    grid-template-columns: 10ch 1px minmax(0, 1fr);
+    gap: var(--space-md);
+    align-items: stretch;
   }
   .about__aside {
     font-style: italic;
     color: var(--color-ink-2);
-    font-size: var(--text-lg);
-    margin: 0 0 var(--space-2xl);
+    font-size: var(--text-md);
+    line-height: 1.5;
+    margin: 0;
+    padding-top: var(--space-sm);
+  }
+  .about__rule { background: var(--color-accent); width: 1px; }
+  .about__col { min-width: 0; }
+  .about__statement {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-display-s);
+    line-height: 1.08;
+    letter-spacing: var(--tracking-display);
+    margin: 0 0 var(--space-xl);
+    text-wrap: balance;
+    overflow-wrap: break-word;
+    min-width: 0;
   }
   .about__figure { margin: 0 0 var(--space-2xl); }
   .about__figure img {
@@ -63,16 +75,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     height: auto;
     display: block;
     border: 1px solid var(--color-rule);
+    filter: saturate(0.72) contrast(1.04) brightness(0.96);
   }
-  .about__prose p { margin: 0 0 var(--space-md); }
+  .about__prose p { margin: 0 0 var(--space-md); max-width: var(--measure); }
   .about__elsewhere {
     font-family: var(--font-display);
     font-weight: 600;
     font-size: var(--text-xl);
-    letter-spacing: -0.01em;
+    letter-spacing: var(--tracking-display);
     margin: var(--space-2xl) 0 var(--space-md);
   }
-  .about__links { list-style: none; margin: 0; padding: 0; }
+  .about__links { list-style: none; margin: 0; padding: 0; max-width: var(--measure); }
   .about__links li {
     padding: var(--space-sm) 0;
     border-top: 1px solid var(--color-rule);
@@ -88,4 +101,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
   .about__links a:hover { color: var(--color-accent); }
   .about__links a:active { color: var(--color-accent); }
+  @media (max-width: 40rem) {
+    .about { grid-template-columns: 9ch 1px minmax(0, 1fr); gap: var(--space-sm); }
+    .about__aside { font-size: var(--text-sm); }
+  }
 </style>

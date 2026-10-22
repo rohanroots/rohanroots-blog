@@ -1,14 +1,15 @@
 ---
-/* Hallmark · v2.0.0 · genre: editorial · macrostructure: Index-First · theme: Nightshift (custom-tuned, locked by design.md) · redesign: full · design-system: design.md */
+/* Hallmark · v2.0.0 · genre: atmospheric · theme: custom (the Logbook) · redesign: full · the entries: number and date hung in the margin on the red rule, title and standfirst in the column */
 
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   posts: CollectionEntry<'blog'>[];
   startAt?: number;
+  lead?: boolean;
 }
 
-const { posts, startAt = 0 } = Astro.props;
+const { posts, startAt = 0, lead = false } = Astro.props;
 const iso = (d: Date) => d.toISOString().slice(0, 10);
 ---
 
@@ -19,63 +20,88 @@ const iso = (d: Date) => d.toISOString().slice(0, 10);
         <span class="rows__num" aria-hidden="true">{String(startAt + i + 1).padStart(2, '0')}</span>
         <time class="rows__date" datetime={post.data.pubDate.toISOString()}>{iso(post.data.pubDate)}</time>
       </div>
-      <h2 class="rows__title"><a href={`/blog/${post.id}/`}>{post.data.title}</a></h2>
-      <p class="rows__desc">{post.data.description}</p>
+      <span class="rows__rule" aria-hidden="true"></span>
+      <div class="rows__main">
+        <h2 class="rows__title"><a href={`/blog/${post.id}/`}>{post.data.title}</a></h2>
+        <p class="rows__desc">{post.data.description}</p>
+        {lead && i === 0 && post.data.image && (
+          <figure class="rows__plate">
+            <img src={post.data.image} alt={post.data.imageAlt ?? ''} />
+          </figure>
+        )}
+      </div>
     </li>
   ))}
 </ol>
 
 <style>
+  /* The logbook's ruling: each entry's number and date sit in a margin, and
+     the red margin rule runs down the record between the margin and the
+     entry, segment by segment, never broken. On the home page the current
+     entry also carries its cover, pasted in as a plate. */
   .rows { list-style: none; margin: 0; padding: 0; }
   .rows__row {
     display: grid;
-    grid-template-columns: 12ch minmax(0, 5fr) minmax(0, 6fr);
-    gap: var(--space-lg);
-    padding: var(--space-lg) 0;
+    grid-template-columns: 10ch 1px minmax(0, 1fr);
+    gap: var(--space-md);
+    padding: var(--space-xl) 0;
     border-top: 1px solid var(--color-rule);
-    align-items: baseline;
+    align-items: stretch;
   }
   .rows__row:last-child { border-bottom: 1px solid var(--color-rule); }
-  .rows__meta { display: flex; flex-direction: column; gap: var(--space-3xs); }
+  .rows__meta { display: flex; flex-direction: column; gap: var(--space-2xs); padding-top: var(--space-xs); }
   .rows__num {
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
+    font-family: var(--font-outlier);
+    font-size: var(--text-lg);
+    line-height: 1.2;
     color: var(--color-accent);
     font-variant-numeric: tabular-nums;
   }
   .rows__date {
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    color: var(--color-ink-2);
+    font-family: var(--font-outlier);
+    font-size: var(--text-xs);
+    line-height: 1.5;
+    color: var(--color-muted);
     font-variant-numeric: tabular-nums;
   }
+  .rows__rule { background: var(--color-accent); width: 1px; }
   .rows__title {
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: var(--text-xl);
-    letter-spacing: -0.01em;
-    line-height: 1.25;
+    font-size: var(--text-title);
+    letter-spacing: var(--tracking-display);
+    line-height: 1.12;
     margin: 0;
     overflow-wrap: break-word;
     min-width: 0;
   }
-  .rows__title a { color: var(--color-ink); text-decoration: none; }
+  .rows__title a {
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: color var(--dur-short) var(--ease-out);
+  }
   .rows__title a:hover { color: var(--color-accent); }
   .rows__title a:active { color: var(--color-accent); }
   .rows__desc {
-    margin: 0;
+    margin: var(--space-sm) 0 0;
     color: var(--color-ink-2);
-    font-size: var(--text-base);
-    max-width: 52ch;
+    font-size: var(--text-md);
+    line-height: 1.55;
+    max-width: 58ch;
   }
-  @media (max-width: 60rem) {
-    .rows__row { grid-template-columns: 12ch minmax(0, 1fr); }
-    .rows__desc { grid-column: 2; }
+  .rows__plate { margin: var(--space-lg) 0 0; }
+  .rows__plate img {
+    width: 100%;
+    aspect-ratio: 21 / 10;
+    object-fit: cover;
+    display: block;
+    border: 1px solid var(--color-rule);
+    filter: saturate(0.72) contrast(1.04) brightness(0.96);
   }
   @media (max-width: 40rem) {
-    .rows__row { grid-template-columns: 1fr; gap: var(--space-xs); }
-    .rows__desc { grid-column: auto; font-size: var(--text-sm); }
-    .rows__meta { flex-direction: row; gap: var(--space-xs); align-items: baseline; }
-    .rows__title { font-size: var(--text-lg); }
+    .rows__row { grid-template-columns: 8ch 1px minmax(0, 1fr); gap: var(--space-sm); padding: var(--space-lg) 0; }
+    .rows__date { font-size: 0.75rem; }
+    .rows__desc { font-size: var(--text-sm); line-height: 1.55; }
+    .rows__plate img { aspect-ratio: 16 / 10; }
   }
 </style>

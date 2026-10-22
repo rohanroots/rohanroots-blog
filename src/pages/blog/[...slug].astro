@@ -1,5 +1,5 @@
 ---
-/* Hallmark · v2.0.0 · genre: editorial · macrostructure: Long Document · theme: Nightshift (custom-tuned, locked by design.md) · redesign: full · hero: Banner · design-system: design.md */
+/* Hallmark · v2.0.0 · genre: atmospheric · theme: custom (the Logbook) · redesign: full · the entry: its number in the margin, the red rule down the record, byline, title and prose in the column */
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
@@ -14,34 +14,41 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const iso = post.data.pubDate.toISOString().slice(0, 10);
 const longDate = post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 const minutes = Math.max(1, Math.round(post.body.split(/\s+/).length / 200));
+const all = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const entryNo = all.findIndex((p) => p.id === post.id) + 1;
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description} image={post.data.image}>
   <article class="doc content-left">
-    <header class="doc__header">
-      <p class="doc__byline">
-        <time datetime={post.data.pubDate.toISOString()}>{longDate}</time>
-        <span aria-hidden="true"> · </span>{minutes} min read
-      </p>
-      <h1 class:list={['doc__title', { 'doc__title--long': post.data.title.length > 50 }]}>{post.data.title}</h1>
-      <p class="doc__lede">{post.data.description}</p>
-      {post.data.image && (
-        <figure class="doc__cover">
-          <img src={post.data.image} alt={post.data.imageAlt ?? ''} />
-        </figure>
-      )}
-    </header>
-    <div class="doc__body">
-      <Content />
+    <div class="doc__meta">
+      <span class="doc__num" aria-hidden="true">{String(entryNo).padStart(2, '0')}</span>
     </div>
-    {post.data.canonical && (
-      <p class="canonical-note">
-        Originally published on <a href={post.data.canonical}>Substack</a>.
-      </p>
-    )}
+    <span class="doc__rule" aria-hidden="true"></span>
+    <div class="doc__col">
+      <header class="doc__header">
+        <p class="doc__byline">
+          <time datetime={post.data.pubDate.toISOString()}>{longDate}</time>
+          <span aria-hidden="true"> · </span>{minutes} min read
+        </p>
+        <h1 class:list={['doc__title', { 'doc__title--long': post.data.title.length > 50 }]}>{post.data.title}</h1>
+        <p class="doc__lede">{post.data.description}</p>
+        {post.data.image && (
+          <figure class="doc__cover">
+            <img src={post.data.image} alt={post.data.imageAlt ?? ''} />
+          </figure>
+        )}
+      </header>
+      <div class="doc__body">
+        <Content />
+      </div>
+      {post.data.canonical && (
+        <p class="canonical-note">
+          Originally published on <a href={post.data.canonical}>Substack</a>.
+        </p>
+      )}
+    </div>
   </article>
 </BaseLayout>
 
@@ -50,6 +57,22 @@ const minutes = Math.max(1, Math.round(post.body.split(/\s+/).length / 200));
      selectors to the component that renders the markup, so these must sit
      next to <article class="doc"> to match. Markdown descendants still
      need :global() since markdown elements get no scope attribute. */
+  .doc {
+    display: grid;
+    grid-template-columns: 10ch 1px minmax(0, 1fr);
+    gap: var(--space-md);
+    align-items: stretch;
+  }
+  .doc__meta { display: flex; flex-direction: column; gap: var(--space-2xs); padding-top: var(--space-xs); }
+  .doc__num {
+    font-family: var(--font-outlier);
+    font-size: var(--text-lg);
+    line-height: 1.2;
+    color: var(--color-accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .doc__rule { background: var(--color-accent); width: 1px; }
+  .doc__col { min-width: 0; }
   .doc__header { padding-bottom: var(--space-lg); border-bottom: 1px solid var(--color-rule); margin-bottom: var(--space-xl); }
   .doc__byline {
     font-size: var(--text-sm);
@@ -62,13 +85,13 @@ const minutes = Math.max(1, Math.round(post.body.split(/\s+/).length / 200));
     font-weight: 600;
     font-size: var(--text-display);
     line-height: 1.05;
-    letter-spacing: -0.02em;
+    letter-spacing: var(--tracking-display);
     margin: 0 0 var(--space-md);
     text-wrap: balance;
     overflow-wrap: break-word;
     min-width: 0;
   }
-  .doc__title--long { font-size: clamp(2.25rem, 4vw + 0.75rem, 3.75rem); }
+  .doc__title--long { font-size: var(--text-display-s); }
   .doc__lede {
     font-size: var(--text-lg);
     line-height: 1.5;
@@ -95,37 +118,24 @@ const minutes = Math.max(1, Math.round(post.body.split(/\s+/).length / 200));
     height: auto;
     display: block;
     border: 1px solid var(--color-rule);
+    filter: saturate(0.72) contrast(1.04) brightness(0.96);
   }
 
-  .doc__body { counter-reset: section; }
   .doc__body :global(p) { margin: 0 0 var(--space-md); text-wrap: pretty; }
   .doc__body :global(h2) {
-    counter-increment: section;
-    display: grid;
-    grid-template-columns: 3.5ch 1fr;
-    gap: var(--space-sm);
-    align-items: baseline;
     font-family: var(--font-display);
     font-weight: 600;
     font-size: var(--text-xl);
-    letter-spacing: -0.01em;
+    letter-spacing: var(--tracking-display);
     line-height: 1.3;
     margin: var(--space-2xl) 0 var(--space-md);
     text-wrap: balance;
-  }
-  .doc__body :global(h2::before) {
-    content: counter(section, decimal-leading-zero);
-    font-family: var(--font-mono);
-    font-weight: 400;
-    font-size: var(--text-sm);
-    color: var(--color-accent);
-    font-variant-numeric: tabular-nums;
   }
   .doc__body :global(h3) {
     font-family: var(--font-display);
     font-weight: 600;
     font-size: var(--text-lg);
-    letter-spacing: -0.01em;
+    letter-spacing: var(--tracking-display);
     margin: var(--space-xl) 0 var(--space-sm);
   }
   .doc__body :global(a) {
@@ -153,8 +163,9 @@ const minutes = Math.max(1, Math.round(post.body.split(/\s+/).length / 200));
   .doc__body :global(th), .doc__body :global(td) { border: none; padding: var(--space-sm) var(--space-md) var(--space-sm) 0; text-align: left; }
   .doc__body :global(th:last-child), .doc__body :global(td:last-child) { padding-right: 0; }
   .doc__body :global(th) { font-family: var(--font-body); font-weight: 600; font-size: var(--text-sm); border-bottom: 1px solid var(--color-rule); }
+  .doc__body :global(td:first-child) { font-weight: 700; color: var(--color-ink); }
   .doc__body :global(code) {
-    font-family: var(--font-mono);
+    font-family: var(--font-outlier);
     font-size: 0.85em;
     background: var(--color-paper-2);
     border: 1px solid var(--color-rule);
@@ -176,7 +187,11 @@ const minutes = Math.max(1, Math.round(post.body.split(/\s+/).length / 200));
     border: 1px solid var(--color-rule);
     display: block;
     margin: var(--space-lg) 0;
+    filter: saturate(0.72) contrast(1.04) brightness(0.96);
   }
   .doc__body :global(hr) { border: none; border-top: 1px solid var(--color-rule); margin: var(--space-2xl) 0; }
   .doc__body :global(strong) { font-weight: 600; }
+  @media (max-width: 40rem) {
+    .doc { grid-template-columns: 3.5ch 1px minmax(0, 1fr); gap: var(--space-sm); }
+  }
 </style>

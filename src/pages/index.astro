@@ -1,5 +1,5 @@
 ---
-/* Hallmark · v2.0.0 · genre: editorial · macrostructure: Index-First · theme: Nightshift (custom-tuned, locked by design.md) · redesign: full · hero: Banner · design-system: design.md */
+/* Hallmark · v2.0.0 · genre: atmospheric · theme: custom (the Logbook) · redesign: full · hero: the opened logbook, the standfirst over the entries */
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostRows from '../components/PostRows.astro';
@@ -11,23 +11,27 @@ const posts = (await getCollection('blog')).sort(
 ---
 
 <BaseLayout title="rohan roots">
-  <div class="home gutter">
+  <div class="home">
     <h1 class="home__head">Notes from the on-call shift. Newest first.</h1>
-    <PostRows posts={posts} />
+    <PostRows posts={posts} lead />
     <p class="home__more"><a href="/archive">Browse the archive</a></p>
   </div>
 </BaseLayout>
 
 <style>
-  .home { max-width: 90rem; margin: 0 auto; }
   .home__head {
-    font-style: italic;
-    font-weight: 400;
-    font-size: var(--text-base);
-    color: var(--color-ink-2);
-    margin: 0 0 var(--space-md);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-display-s);
+    letter-spacing: var(--tracking-display);
+    line-height: 1.08;
+    color: var(--color-ink);
+    margin: 0 0 var(--space-2xl);
+    max-width: 16ch;
+    overflow-wrap: break-word;
+    min-width: 0;
   }
-  .home__more { margin: var(--space-xl) 0 0; font-size: var(--text-base); }
+  .home__more { margin: var(--space-xl) 0 0; font-size: var(--text-md); }
   .home__more a {
     color: var(--color-ink);
     white-space: nowrap;
