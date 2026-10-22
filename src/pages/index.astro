@@ -1,5 +1,5 @@
 ---
-/* Hallmark · genre: editorial · macrostructure: Index-First · theme: Nightshift (custom-tuned) · design-system: design.md · designed-as-app */
+/* Hallmark · v2.0.0 · genre: editorial · macrostructure: Index-First · theme: Nightshift (custom-tuned, locked by design.md) · redesign: full · hero: Banner · design-system: design.md */
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostRows from '../components/PostRows.astro';
@@ -12,19 +12,20 @@ const posts = (await getCollection('blog')).sort(
 
 <BaseLayout title="rohan roots">
   <div class="home gutter">
-    <p class="home__label">Notes from the on-call shift. Newest first.</p>
+    <h1 class="home__head">Notes from the on-call shift. Newest first.</h1>
     <PostRows posts={posts} />
-    <p class="home__more"><a href="/archive">Browse the archive &rarr;</a></p>
+    <p class="home__more"><a href="/archive">Browse the archive</a></p>
   </div>
 </BaseLayout>
 
 <style>
-  .home { max-width: 62rem; margin: 0 auto; }
-  .home__label {
+  .home { max-width: 90rem; margin: 0 auto; }
+  .home__head {
     font-style: italic;
+    font-weight: 400;
     font-size: var(--text-base);
     color: var(--color-ink-2);
-    margin: 0 0 var(--space-xl);
+    margin: 0 0 var(--space-md);
   }
   .home__more { margin: var(--space-xl) 0 0; font-size: var(--text-base); }
   .home__more a {
@@ -37,4 +38,5 @@ const posts = (await getCollection('blog')).sort(
     transition: color var(--dur-short) var(--ease-out);
   }
   .home__more a:hover { color: var(--color-accent); }
+  .home__more a:active { color: var(--color-accent); }
 </style>

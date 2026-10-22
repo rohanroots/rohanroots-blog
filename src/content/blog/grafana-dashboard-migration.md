@@ -3,9 +3,8 @@ title: "Behind a Grafana Dashboard Migration: What JSON Can't Do"
 description: "I had roughly 140 dashboards to move from Grafana v11 to v12. Exporting and importing the JSON was the quick part."
 pubDate: 2026-09-28
 image: "/blog/grafana-cover.png"
+imageAlt: "Editorial illustration of dashboard panels moving between monitoring systems, with cables, security controls, certificates, and validation work around the transfer"
 ---
-
-![Editorial illustration of dashboard panels moving between monitoring systems, with cables, security controls, certificates, and validation work around the transfer](/blog/grafana-cover.png)
 
 | **~140** dashboards | **3** tracker views | **v11 → v12** Grafana versions |
 | --- | --- | --- |

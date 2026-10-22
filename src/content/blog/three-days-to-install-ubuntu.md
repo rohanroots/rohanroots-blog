@@ -4,9 +4,8 @@ description: "I thought this would take half an hour. Then the USB stick died, t
 pubDate: 2026-09-21
 canonical: "https://rohanroots.substack.com"
 image: "/blog/ubuntu-cover.png"
+imageAlt: "Ubuntu running on the Lenovo Yoga 720"
 ---
-
-![Ubuntu running on the Lenovo Yoga 720](/blog/ubuntu-cover.png)
 
 For months, my old Lenovo Yoga 720 had been doing what old laptops do best: lying around. Its battery indicator was always stuck at 0 percent, so I did not think much about it. I had quietly accepted that its main job was now collecting dust.
 

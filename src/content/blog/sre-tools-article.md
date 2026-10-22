@@ -3,9 +3,8 @@ title: "The Tools the Enterprise Actually Lets Me Run: My SRE Stack"
 description: "The honest list of tools I open every day as an SRE. It starts in the cluster and ends with the paperwork."
 pubDate: 2026-10-10
 image: "/blog/sre-tools-cover.png"
+imageAlt: "Editorial illustration of an SRE desk at night with monitors showing dashboards and code, server racks, clouds, and a glowing pager"
 ---
-
-![Editorial illustration of an SRE desk at night with monitors showing dashboards and code, server racks, clouds, and a glowing pager](/blog/sre-tools-cover.png)
 
 People ask what tools I use as an SRE. The better question is which tools survive enterprise security review. Most of the shiny stuff never makes it past procurement. Here is what I actually open every day. It starts in the cluster and ends with the paperwork.
 

@@ -1,5 +1,5 @@
 ---
-/* Hallmark · genre: editorial · macrostructure: Index-First · theme: Nightshift (custom-tuned) · design-system: design.md · designed-as-app */
+/* Hallmark · v2.0.0 · genre: editorial · macrostructure: Index-First · theme: Nightshift (custom-tuned, locked by design.md) · redesign: full · hero: Banner · design-system: design.md */
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostRows from '../components/PostRows.astro';
@@ -20,7 +20,7 @@ const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
 
 <BaseLayout title="Archive">
   <div class="archive gutter">
-    <p class="archive__label">Everything, by year.</p>
+    <h1 class="archive__head">Everything, by year.</h1>
     {years.map((year) => (
       <section class="archive__year" aria-label={year}>
         <h2 class="archive__year-label">{year}</h2>
@@ -31,9 +31,10 @@ const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
 </BaseLayout>
 
 <style>
-  .archive { max-width: 62rem; margin: 0 auto; }
-  .archive__label {
+  .archive { max-width: 90rem; margin: 0 auto; }
+  .archive__head {
     font-style: italic;
+    font-weight: 400;
     font-size: var(--text-base);
     color: var(--color-ink-2);
     margin: 0 0 var(--space-2xl);
@@ -47,7 +48,9 @@ const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
     letter-spacing: -0.01em;
     margin: 0 0 var(--space-md);
     color: var(--color-ink);
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+    min-width: 0;
+    text-wrap: balance;
   }
   .archive__year-label::after {
     content: "";

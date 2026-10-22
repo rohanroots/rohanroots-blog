@@ -1,1 +1,37 @@
-{"runs":[{"date":"2026-09-29","design_system":"design.md","footer":"Ft4 dense typographic colophon (knobs: monospace, single block, set-in line + build credits + RSS)","genre":"editorial","macrostructures":["Index-First (home, archive)","Long Document (blog posts, about)"],"nav":"N6 newspaper masthead (knobs: issue-line above wordmark, wordmark 2xl lowercase, double rule)","notes":"First Hallmark run on this project. Kept the site's dark paper and single teal brand anchor; amber removed from the system. No enrichment anywhere; motion-cut. Routes, copy, metadata, RSS untouched.","scope":"app","theme":"Nightshift (custom-tuned, not catalog)","typography":"Fraunces (display) + Newsreader (body) + JetBrains Mono (technical register)","verb":"redesign"}]}
+[
+  {
+    "date": "2026-10-22",
+    "verb": "redesign",
+    "mode": "redesign",
+    "depth": "full",
+    "scope": "app",
+    "genre": "editorial",
+    "theme": "Nightshift (custom-tuned, locked by design.md; pre-flight signal 1, no deal)",
+    "macrostructures": [
+      "Index-First (home, archive)",
+      "Long Document (blog posts, about)"
+    ],
+    "nav": "N6 newspaper masthead (knobs amended: issue line in body face, sentence case, untracked)",
+    "footer": "Ft4 dense typographic colophon",
+    "typography": "Fraunces (display) + Newsreader (body) + JetBrains Mono (technical register)",
+    "design_system": "design.md (two knobs amended, dated Amendments entry)",
+    "notes": "Hallmark v2 full redesign under the locked Nightshift system. Index rows recomposed to a three-column grid at the full-gutter width design.md always prescribed, rows at one strength after hero review; article covers moved into the header by the template (alt text in frontmatter imageAlt); bylines and issue line in the body face per gate 67; canonical note moved to the article foot; About eyebrow kicker dropped (recorded), figure brought inside the page head. Sloplint: before 14 FAIL / 15 REFLEX, after 0 FAIL / 0 REFLEX; kept links 17/17, headings 7/7, figures 8/8. Hero review: fix, 4 findings, 3 resolved, 1 dismissed with DOM evidence. Finish review: fix, 2 findings, both resolved. Content, routes, RSS untouched; nothing pushed or deployed.",
+    "prompt": "Redesign the rohan roots blog (Astro, rohanroots.dev) with Hallmark v2: same posts, copy, routes and information architecture, visual redesign only, under the locked Nightshift design system in design.md. Audience: SRE/Kubernetes practitioners; the site exists to be read and followed via RSS."
+  },
+  {
+    "date": "2026-09-29",
+    "design_system": "design.md",
+    "footer": "Ft4 dense typographic colophon (knobs: monospace, single block, set-in line + build credits + RSS)",
+    "genre": "editorial",
+    "macrostructures": [
+      "Index-First (home, archive)",
+      "Long Document (blog posts, about)"
+    ],
+    "nav": "N6 newspaper masthead (knobs: issue-line above wordmark, wordmark 2xl lowercase, double rule)",
+    "notes": "First Hallmark run on this project. Kept the site's dark paper and single teal brand anchor; amber removed from the system. No enrichment anywhere; motion-cut. Routes, copy, metadata, RSS untouched.",
+    "scope": "app",
+    "theme": "Nightshift (custom-tuned, not catalog)",
+    "typography": "Fraunces (display) + Newsreader (body) + JetBrains Mono (technical register)",
+    "verb": "redesign"
+  }
+]

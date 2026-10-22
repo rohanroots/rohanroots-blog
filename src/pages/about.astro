@@ -1,17 +1,18 @@
 ---
-/* Hallmark · genre: editorial · macrostructure: Long Document · theme: Nightshift (custom-tuned) · design-system: design.md · designed-as-app */
+/* Hallmark · v2.0.0 · genre: editorial · macrostructure: Long Document · theme: Nightshift (custom-tuned, locked by design.md) · redesign: full · hero: Banner · design-system: design.md */
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="About">
   <div class="about content-left">
-    <p class="about__kicker">About</p>
-    <h1 class="about__statement">Ten years of keeping things running.</h1>
-    <p class="about__aside">Platform Engineer</p>
-    <figure class="about__figure">
-      <img src="/header.png" alt="rohan roots" />
-    </figure>
+    <header class="about__head">
+      <h1 class="about__statement">Ten years of keeping things running.</h1>
+      <p class="about__aside">Platform Engineer</p>
+      <figure class="about__figure">
+        <img src="/header.png" alt="rohan roots" width="2736" height="912" />
+      </figure>
+    </header>
     <div class="about__prose">
       <p>
         I&rsquo;ve worked in IT for over 10 years. Started as a sys admin, moved
@@ -27,25 +28,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
       <h2 class="about__elsewhere">Elsewhere</h2>
       <ul class="about__links">
-        <li><a href="https://x.com/rohanroots">X &nearr;</a></li>
-        <li><a href="https://bsky.app/profile/rohanroots.dev">Bluesky &nearr;</a></li>
-        <li><a href="https://rohanroots.substack.com">Substack &nearr;</a></li>
-        <li><a href="https://dev.to/rohan_roots">Dev.to &nearr;</a></li>
-        <li><a href="https://medium.com/@rohan_roots">Medium &nearr;</a></li>
+        <li><a href="https://x.com/rohanroots">X</a></li>
+        <li><a href="https://bsky.app/profile/rohanroots.dev">Bluesky</a></li>
+        <li><a href="https://rohanroots.substack.com">Substack</a></li>
+        <li><a href="https://dev.to/rohan_roots">Dev.to</a></li>
+        <li><a href="https://medium.com/@rohan_roots">Medium</a></li>
       </ul>
     </div>
   </div>
 </BaseLayout>
 
 <style>
-  .about__kicker {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-ink-2);
-    margin: 0 0 var(--space-md);
-  }
+  .about__head { padding-top: var(--space-lg); }
   .about__statement {
     font-family: var(--font-display);
     font-weight: 600;
@@ -54,7 +48,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     letter-spacing: -0.02em;
     margin: 0 0 var(--space-xs);
     text-wrap: balance;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+    min-width: 0;
   }
   .about__aside {
     font-style: italic;
@@ -89,4 +84,5 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     transition: color var(--dur-short) var(--ease-out);
   }
   .about__links a:hover { color: var(--color-accent); }
+  .about__links a:active { color: var(--color-accent); }
 </style>

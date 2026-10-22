@@ -63,11 +63,11 @@ Page gutter: `clamp(1.25rem, 5vw, 3rem)`.
 - Focus: visible accent outline, 0 delay.
 
 ## CTA voice
-- **C3 typographic link** — a word, an arrow, a 1px underline. No buttons on
-  this site. ("Read →", "RSS →".)
+- **C3 typographic link** — a word, a 1px underline. No buttons on
+  this site. ("Read", "RSS".)
 
 ## Navigation — N6 Newspaper masthead
-Knobs: issue-line=above wordmark (his tagline, serif small caps) ·
+Knobs: issue-line=above wordmark (his tagline, serif, sentence case, untracked) ·
 wordmark=2xl lowercase Fraunces · rule=double.
 Centered wordmark is the archetype (broadsheet), not default-centering.
 Active page gets `aria-current` + accent underline.
@@ -177,3 +177,16 @@ credits, RSS. Ragged-right, muted. No link farm — Elsewhere lives on /about.
   --radius: 0.25rem;
 }
 ```
+
+## Amendments
+
+- 2026-10-22, Hallmark v2 redesign (full). Two knobs above amended where the
+  v1 build conflicted with the v2 Floor: the masthead issue line is no longer
+  small caps (gate 67: labels are the body face, sentence case, untracked),
+  and the C3 link voice drops its glued arrow (gate 63). Article bylines
+  (date, reading time) are set in the body face; mono stays the register for
+  code, dates in the index, table heads and the colophon. Index pages now
+  actually use the full-gutter grid this file always prescribed, its rows at
+  one strength, the numeral and hairlines carrying the hierarchy, and the
+  index sits closer under the masthead (main top padding and the intro
+  margin tightened) after hero review.

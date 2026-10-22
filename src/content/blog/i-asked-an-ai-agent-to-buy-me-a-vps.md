@@ -4,9 +4,8 @@ description: "It compared providers, picked a $35.99-a-year server, filled out t
 pubDate: 2026-09-13
 canonical: "https://rohanroots.substack.com"
 image: "/blog/vps-cover.png"
+imageAlt: "An AI agent pushing a shopping cart with a server rack in it"
 ---
-
-![An AI agent pushing a shopping cart with a server rack in it](/blog/vps-cover.png)
 
 **FIELD NOTES ON PRACTICAL AI AGENTS**
 
